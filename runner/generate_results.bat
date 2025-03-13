@@ -1,0 +1,13 @@
+@echo off
+echo Generating results...
+
+echo Computing RQ1 & RQ2 results...
+python ../scripts/rq1_rq2_results.py || exit /b 1
+
+echo Computing RQ3 results...
+python ../scripts/rq3_results.py || exit /b 1
+
+echo Generating figures...
+python ../scripts/figures.py || exit /b 1
+
+echo Results generation completed successfully.
