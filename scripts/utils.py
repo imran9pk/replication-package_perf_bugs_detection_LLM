@@ -4,6 +4,7 @@ import torch
 import pandas as pd
 import argparse
 from transformers import AutoTokenizer, AutoModelForCausalLM
+import json
 
 # Function to parse arguments and set up directories
 def setup_experiment(experiment_type):
@@ -50,15 +51,14 @@ def setup_experiment(experiment_type):
 
 # Function to read Hugging Face token from a `.env` file
 def read_huggingface_token():
-    token_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
+    token_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config.json")
+
     token = None
     
     if os.path.exists(token_file_path):
         with open(token_file_path, "r", encoding="utf-8") as file:
-            for line in file:
-                if line.startswith("HUGGINGFACE_TOKEN="):
-                    token = line.strip().split("=")[1].strip()
-                    break
+            config = json.load(file)
+            token = config.get("HUGGINGFACE_TOKEN", None)
     
     if not token:
         token = os.getenv("HUGGINGFACE_TOKEN")  # Fallback to environment variable if file is missing

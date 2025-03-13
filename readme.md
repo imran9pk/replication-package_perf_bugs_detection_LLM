@@ -18,7 +18,16 @@ pip install -r requirements.txt
 ### Hugging Face API Key
 
 - The LLM inference scripts require a **Hugging Face API** token.  
-- Set it in the **`.env`** file before running inference.
+- Set the token in the ```config.json``` file before running inference.
+
+```
+{
+  "HUGGINGFACE_TOKEN": "Your_token"
+}
+```
+
+The token should be replaced with your actual Hugging Face API token.
+
 
 ## 2. Directory Structure and Description
 
@@ -30,7 +39,7 @@ replication-package_per_bug_detection_LLM/
 │── projects/                   # Contains source code of analyzed projects
 │── scripts/                    # Contains Python scripts for LLM and ML processing
 │── runner/                     # Contains batch and shell scripts for execution
-│── .env                        # Stores API key for Hugging Face
+│── config.json                 # Stores API key for Hugging Face
 │── requirements.txt            # Lists dependencies
 │── README.md                   # This file
 ```
